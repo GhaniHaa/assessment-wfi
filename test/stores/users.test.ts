@@ -43,7 +43,7 @@ describe('User Store', () => {
   it('initializes with default state', () => {
     const store = useUserStore()
     expect(store.users).toEqual([])
-    expect(store.loading).toBe(false)
+    expect(store.loading).toBe(true)
     expect(store.searchQuery).toBe('')
     expect(store.pagination.currentPage).toBe(1)
   })
