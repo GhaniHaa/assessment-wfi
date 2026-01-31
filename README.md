@@ -151,7 +151,7 @@ The application uses a **smart caching strategy** to optimize API calls and impr
 ```typescript
 const initialize = async () => {
   userStore.syncFromUrl();
-  // Only fetch if we don't have users yet (smart caching)
+  // Only fetch if we don't have users yet
   if (userStore.users.length === 0) {
     await userStore.fetchUsers();
   }

@@ -337,7 +337,7 @@ export const useUserManagement = () => {
   // Initialize: Sync state from URL and fetch data if needed
   const initialize = async () => {
     userStore.syncFromUrl();
-    // Only fetch if we don't have users yet (smart caching)
+    // Only fetch if we don't have users yet
     if (userStore.users.length === 0) {
       await userStore.fetchUsers();
     }
