@@ -25,6 +25,13 @@
       </div>
 
       <div class="flex gap-2">
+        <NuxtLink
+          :to="`/users/${user.id}`"
+          class="p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+          title="View Details"
+        >
+          <Icon name="heroicons:eye" class="w-4 h-4" />
+        </NuxtLink>
         <button
           @click="$emit('edit', user)"
           class="p-2 text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg transition-colors"

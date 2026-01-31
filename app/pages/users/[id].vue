@@ -25,7 +25,12 @@
 
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <!-- Header -->
-        <DetailUserHeader :user="user" class="mb-8" />
+        <DetailUserHeader 
+          :user="user" 
+          class="mb-8" 
+          @edit="startEdit"
+          @delete="confirmDelete"
+        />
 
         <!-- Content Sections -->
         <div class="grid gap-6 md:grid-cols-2">
@@ -36,10 +41,28 @@
         </div>
       </div>
     </div>
+
+    <!-- Modals -->
+    <UserForm
+      v-if="editingUser"
+      :user="editingUser"
+      @save="saveUser"
+      @close="editingUser = null"
+    />
+
+    <ConfirmDialog
+      v-if="showDeleteConfirm"
+      title="Delete User"
+      message="Are you sure you want to delete this user? This action cannot be undone."
+      @confirm="deleteUser"
+      @cancel="showDeleteConfirm = false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import type { User } from '../../types/user'
+
 const route = useRoute()
 const userStore = useUserStore()
 const router = useRouter()
@@ -66,6 +89,7 @@ const { data: user, status } = await useAsyncData(
     }
   }
 )
+
 onMounted(() => {
   if (!user.value) {
     router.push('/')
@@ -78,4 +102,37 @@ const loading = computed(() => status.value === 'pending')
 useHead({
   title: computed(() => user.value ? `${user.value.firstName} ${user.value.lastName}` : 'User Details'),
 })
+
+// Edit & Delete Logic
+const editingUser = ref<User | null>(null)
+const showDeleteConfirm = ref(false)
+
+const startEdit = () => {
+  if (user.value) {
+    editingUser.value = JSON.parse(JSON.stringify(user.value))
+  }
+}
+
+const saveUser = async (updates: Partial<User>) => {
+  if (!user.value) return
+
+  // Update store
+  await userStore.updateUser(user.value.id, updates)
+  
+  // Update local state
+  Object.assign(user.value, updates)
+  editingUser.value = null
+}
+
+const confirmDelete = () => {
+  showDeleteConfirm.value = true
+}
+
+const deleteUser = async () => {
+  if (!user.value) return
+  
+  await userStore.deleteUser(user.value.id)
+  showDeleteConfirm.value = false
+  router.push('/')
+}
 </script>
