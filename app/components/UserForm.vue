@@ -199,7 +199,67 @@ function handleSubmit() {
     return
   }
 
-  emit('save', result.data as User)
+  // Default values for user. These values are not required for the user, but they are required for the user object.
+  // Because when we fill it manually it will take too much time.
+  const defaultAddress = {
+    address: '123 Innovation Dr',
+    city: 'Tech City',
+    state: 'CA',
+    stateCode: 'CA',
+    postalCode: '94043',
+    coordinates: { lat: 37.422, lng: -122.084 },
+    country: 'USA'
+  }
+  const defaults = {
+    maidenName: 'N/A',
+    password: 'password123',
+    bloodGroup: 'O+',
+    height: 175,
+    weight: 70,
+    eyeColor: 'Brown',
+    hair: { color: 'Black', type: 'Straight' },
+    ip: '192.168.1.1',
+    address: defaultAddress,
+    macAddress: '00:00:00:00:00:00',
+    university: 'Tech University',
+    bank: {
+      cardExpire: '12/28',
+      cardNumber: '4532123456789012',
+      cardType: 'Visa',
+      currency: 'USD',
+      iban: 'US12345678901234567890'
+    },
+    ein: '12-3456789',
+    ssn: '123-45-6789',
+    userAgent: 'Mozilla/5.0 (Modern Browser)',
+    crypto: {
+      coin: 'Bitcoin',
+      wallet: '0x123...abc',
+      network: 'Ethereum'
+    }
+  }
+
+  const formCompanyData = result.data.company || {}
+  const mergedCompany = {
+    department: formCompanyData.department || props.user?.company?.department || 'Engineering',
+    name: formCompanyData.name || props.user?.company?.name || 'Acme Corp',
+    title: formCompanyData.title || props.user?.company?.title || 'Developer',
+    address: props.user?.company?.address || defaultAddress
+  }
+
+  const finalUser = {
+    ...defaults,
+    ...props.user,
+    ...result.data,
+    company: mergedCompany,
+    // Ensure nested objects from defaults are used if missing in props.user
+    hair: props.user?.hair || defaults.hair,
+    address: props.user?.address || defaults.address,
+    bank: props.user?.bank || defaults.bank,
+    crypto: props.user?.crypto || defaults.crypto
+  }
+
+  emit('save', finalUser as User)
   emit('close')
 }
 </script>

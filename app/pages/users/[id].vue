@@ -25,14 +25,14 @@
 
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <!-- Header -->
-        <UserHeader :user="user" class="mb-8" />
+        <DetailUserHeader :user="user" class="mb-8" />
 
         <!-- Content Sections -->
         <div class="grid gap-6 md:grid-cols-2">
-          <PersonalStats :user="user" />
-          <LocationInfo :user="user" />
-          <EmploymentInfo :user="user" />
-          <FinanceInfo :user="user" />
+          <DetailPersonalStats :user="user" />
+          <DetailLocationInfo :user="user" />
+          <DetailEmploymentInfo :user="user" />
+          <DetailFinanceInfo :user="user" />
         </div>
       </div>
     </div>
