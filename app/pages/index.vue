@@ -34,7 +34,7 @@
         />
 
         <Pagination
-          v-if="userStore.totalPages > 1"
+          v-if="!userStore.loading && userStore.totalPages > 0"
           v-model:current-page="userStore.pagination.currentPage"
           v-model:items-per-page="userStore.pagination.itemsPerPage"
           :total-pages="userStore.totalPages"

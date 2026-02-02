@@ -121,6 +121,10 @@
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
   }
+
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @layer utilities {
