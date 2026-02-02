@@ -34,14 +34,14 @@
         </NuxtLink>
         <button
           @click="$emit('edit', user)"
-          class="p-2 text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg transition-colors"
+          class="p-2 text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           title="Edit"
         >
           <Icon name="heroicons:pencil" class="w-4 h-4" />
         </button>
         <button
           @click="$emit('delete', user.id)"
-          class="p-2 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+          class="p-2 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
           title="Delete"
         >
           <Icon name="heroicons:trash" class="w-4 h-4" />
