@@ -56,15 +56,15 @@ export const useUserStore = defineStore('users', () => {
     const result = [...filteredUsers.value]
 
     result.sort((a, b) => {
-      let aVal: any = a[sortField.value]
-      let bVal: any = b[sortField.value]
+      let aVal = a[sortField.value]
+      let bVal = b[sortField.value]
 
       if (sortField.value === 'firstName') {
         aVal = `${a.firstName} ${a.lastName}`
         bVal = `${b.firstName} ${b.lastName}`
       }
 
-      if (typeof aVal === 'string') {
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
         aVal = aVal.toLowerCase()
         bVal = bVal.toLowerCase()
       }
@@ -188,7 +188,7 @@ export const useUserStore = defineStore('users', () => {
   }
 
   function syncToUrl() {
-    const query: Record<string, any> = {}
+    const query: Record<string, string | number | string[]> = {}
 
     if (pagination.value.currentPage > 1) {
       query.page = pagination.value.currentPage

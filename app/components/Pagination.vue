@@ -5,8 +5,8 @@
         <span class="mr-2">Limit:</span>
         <select
           :value="itemsPerPage"
-          @change="handleLimitChange"
           class="rounded-lg border-slate-200 text-sm focus:border-primary-500 focus:ring-primary-500 py-1 pr-8"
+          @change="handleLimitChange"
         >
           <option :value="12">12</option>
           <option :value="25">25</option>
@@ -22,9 +22,9 @@
     <div v-if="totalPages > 1" class="flex items-center gap-2">
       <!-- Previous Button -->
       <button
-        @click="goToPage(currentPage - 1)"
         :disabled="currentPage === 1"
         class="btn btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+        @click="goToPage(currentPage - 1)"
       >
         <Icon name="heroicons:chevron-left" class="w-5 h-5" />
       </button>
@@ -34,7 +34,6 @@
         <button
           v-for="page in visiblePages"
           :key="page"
-          @click="typeof page === 'number' ? goToPage(page) : null"
           :class="[
             'min-w-[2.5rem] h-10 rounded-lg font-medium transition-colors',
             page === currentPage
@@ -44,6 +43,7 @@
               : 'cursor-default text-slate-400'
           ]"
           :disabled="typeof page !== 'number'"
+          @click="typeof page === 'number' ? goToPage(page) : null"
         >
           {{ page }}
         </button>
@@ -51,9 +51,9 @@
 
       <!-- Next Button -->
       <button
-        @click="goToPage(currentPage + 1)"
         :disabled="currentPage === totalPages"
         class="btn btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
+        @click="goToPage(currentPage + 1)"
       >
         <Icon name="heroicons:chevron-right" class="w-5 h-5" />
       </button>

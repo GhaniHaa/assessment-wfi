@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-slate-50">
     <!-- Loading State -->
     <div v-if="loading" class="flex justify-center items-center min-h-screen">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"/>
     </div>
 
     <!-- Error State -->

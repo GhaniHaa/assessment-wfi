@@ -7,13 +7,13 @@
         <button
           v-for="role in availableRoles"
           :key="role"
-          @click="toggleRole(role)"
           :class="[
             'badge cursor-pointer border-2 transition-all',
             roles.includes(role)
               ? `badge-${role.toLowerCase()} border-current`
               : 'bg-slate-100 text-slate-600 border-transparent hover:border-slate-300'
           ]"
+          @click="toggleRole(role)"
         >
           {{ role.toUpperCase() }}
         </button>
@@ -27,13 +27,13 @@
         <button
           v-for="gender in availableGenders"
           :key="gender"
-          @click="toggleGender(gender)"
           :class="[
             'badge cursor-pointer border-2 transition-all capitalize',
             genders.includes(gender)
               ? 'bg-primary-100 text-primary-800 border-primary-300'
               : 'bg-slate-100 text-slate-600 border-transparent hover:border-slate-300'
           ]"
+          @click="toggleGender(gender)"
         >
           {{ gender }}
         </button>

@@ -8,7 +8,7 @@
         <h3 class="text-sm font-semibold text-slate-700 mb-2">Company</h3>
         <div class="space-y-1">
           <p class="font-medium text-slate-900">{{ user.company?.name || '-' }}</p>
-          <p class="text-slate-600" v-if="user.company?.department">{{ user.company.department }}</p>
+          <p v-if="user.company?.department" class="text-slate-600">{{ user.company.department }}</p>
         </div>
       </div>
 

@@ -3,7 +3,7 @@
     <Transition name="modal">
       <div v-if="show" class="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/50" @click="$emit('close')"></div>
+        <div class="absolute inset-0 bg-black/50" @click="$emit('close')"/>
 
         <!-- Modal -->
         <div class="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
@@ -12,23 +12,23 @@
             <h2 class="text-2xl font-bold text-slate-900">
               {{ user ? 'Edit User' : 'Add New User' }}
             </h2>
-            <button @click="$emit('close')" class="text-slate-400 hover:text-slate-600">
+            <button class="text-slate-400 hover:text-slate-600" @click="$emit('close')">
               <Icon name="heroicons:x-mark" class="w-6 h-6" />
             </button>
           </div>
 
           <!-- Form -->
-          <form @submit.prevent="handleSubmit" class="p-6 space-y-6">
+          <form class="p-6 space-y-6" @submit.prevent="handleSubmit">
             <!-- Basic Info -->
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">First Name *</label>
-                <input v-model="formData.firstName" type="text" required class="input" />
+                <input v-model="formData.firstName" type="text" required class="input" >
                 <p v-if="errors['firstName']" class="text-red-600 text-sm mt-1">{{ errors['firstName'] }}</p>
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Last Name *</label>
-                <input v-model="formData.lastName" type="text" required class="input" />
+                <input v-model="formData.lastName" type="text" required class="input" >
                 <p v-if="errors['lastName']" class="text-red-600 text-sm mt-1">{{ errors['lastName'] }}</p>
               </div>
             </div>
@@ -36,12 +36,12 @@
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Username *</label>
-                <input v-model="formData.username" type="text" required class="input" />
+                <input v-model="formData.username" type="text" required class="input" >
                 <p v-if="errors['username']" class="text-red-600 text-sm mt-1">{{ errors['username'] }}</p>
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Email *</label>
-                <input v-model="formData.email" type="email" required class="input" />
+                <input v-model="formData.email" type="email" required class="input" >
                 <p v-if="errors['email']" class="text-red-600 text-sm mt-1">{{ errors['email'] }}</p>
               </div>
             </div>
@@ -49,12 +49,12 @@
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Phone *</label>
-                <input v-model="formData.phone" type="tel" required class="input" />
+                <input v-model="formData.phone" type="tel" required class="input" >
                 <p v-if="errors['phone']" class="text-red-600 text-sm mt-1">{{ errors['phone'] }}</p>
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Birth Date *</label>
-                <input v-model="formData.birthDate" type="date" required class="input" />
+                <input v-model="formData.birthDate" type="date" required class="input" >
                 <p v-if="errors['birthDate']" class="text-red-600 text-sm mt-1">{{ errors['birthDate'] }}</p>
               </div>
             </div>
@@ -79,14 +79,14 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-slate-700 mb-2">Age *</label>
-                <input v-model.number="formData.age" type="number" min="1" max="120" required class="input" />
+                <input v-model.number="formData.age" type="number" min="1" max="120" required class="input" >
                 <p v-if="errors['age']" class="text-red-600 text-sm mt-1">{{ errors['age'] }}</p>
               </div>
             </div>
 
             <div>
               <label class="block text-sm font-medium text-slate-700 mb-2">Profile Image URL</label>
-              <input v-model="formData.image" type="url" class="input" placeholder="https://..." />
+              <input v-model="formData.image" type="url" class="input" placeholder="https://..." >
               <p v-if="errors['image']" class="text-red-600 text-sm mt-1">{{ errors['image'] }}</p>
             </div>
 
@@ -96,18 +96,18 @@
               <div class="space-y-4">
                 <div>
                   <label class="block text-sm font-medium text-slate-700 mb-2">Job Title</label>
-                  <input v-model="formData.company.title" type="text" class="input" />
+                  <input v-model="formData.company.title" type="text" class="input" >
                   <p v-if="errors['company.title']" class="text-red-600 text-sm mt-1">{{ errors['company.title'] }}</p>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                   <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Company Name</label>
-                    <input v-model="formData.company.name" type="text" class="input" />
+                    <input v-model="formData.company.name" type="text" class="input" >
                     <p v-if="errors['company.name']" class="text-red-600 text-sm mt-1">{{ errors['company.name'] }}</p>
                   </div>
                   <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">Department</label>
-                    <input v-model="formData.company.department" type="text" class="input" />
+                    <input v-model="formData.company.department" type="text" class="input" >
                     <p v-if="errors['company.department']" class="text-red-600 text-sm mt-1">{{ errors['company.department'] }}</p>
                   </div>
                 </div>
@@ -116,7 +116,7 @@
 
             <!-- Submit Buttons -->
             <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
-              <button type="button" @click="$emit('close')" class="btn btn-secondary">
+              <button type="button" class="btn btn-secondary" @click="$emit('close')">
                 Cancel
               </button>
               <button type="submit" class="btn btn-primary">

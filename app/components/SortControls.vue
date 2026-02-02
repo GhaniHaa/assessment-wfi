@@ -5,13 +5,13 @@
       <button
         v-for="option in options"
         :key="option.value"
-        @click="handleSort(option.value)"
         class="group relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200"
         :class="[
           field === option.value
             ? 'bg-white text-slate-900 shadow-sm ring-1 ring-slate-200'
             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/50'
         ]"
+        @click="handleSort(option.value)"
       >
         <span>{{ option.label }}</span>
         

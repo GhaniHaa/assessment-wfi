@@ -1,17 +1,19 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
+import type { User } from '../../app/types/user'
+import { useUserStore } from '../../app/stores/users'
 
 // Mock the router and route
-global.useRouter = () => ({
+vi.stubGlobal('useRouter', () => ({
   push: () => {},
-})
+}))
 
-global.useRoute = () => ({
+vi.stubGlobal('useRoute', () => ({
   query: {},
-})
+}))
 
 // Mock the API
-global.useApi = () => ({
+vi.stubGlobal('useApi', () => ({
   fetchUsers: async () => ({
     users: [
       {
@@ -33,7 +35,7 @@ global.useApi = () => ({
     firstName: 'John',
     lastName: 'Doe',
   }),
-})
+}))
 
 describe('User Store', () => {
   beforeEach(() => {
@@ -72,7 +74,7 @@ describe('User Store', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john@example.com',
-      } as any,
+      } as unknown as User,
     ]
 
     store.updateUser(1, { firstName: 'Johnny' })
@@ -81,7 +83,7 @@ describe('User Store', () => {
 
   it('deletes a user', () => {
     const store = useUserStore()
-    store.users = [{ id: 1 } as any, { id: 2 } as any]
+    store.users = [{ id: 1 } as unknown as User, { id: 2 } as unknown as User]
 
     store.deleteUser(1)
     expect(store.users.length).toBe(1)
@@ -91,8 +93,8 @@ describe('User Store', () => {
   it('filters users by search query', () => {
     const store = useUserStore()
     store.users = [
-      { id: 1, firstName: 'John', lastName: 'Doe', email: 'john@example.com', username: 'johnd' } as any,
-      { id: 2, firstName: 'Jane', lastName: 'Smith', email: 'jane@example.com', username: 'janes' } as any,
+      { id: 1, firstName: 'John', lastName: 'Doe', email: 'john@example.com', username: 'johnd' } as unknown as User,
+      { id: 2, firstName: 'Jane', lastName: 'Smith', email: 'jane@example.com', username: 'janes' } as unknown as User,
     ]
 
     store.searchQuery = 'jane'
@@ -103,8 +105,8 @@ describe('User Store', () => {
   it('filters users by role', () => {
     const store = useUserStore()
     store.users = [
-      { id: 1, role: 'admin' } as any,
-      { id: 2, role: 'user' } as any,
+      { id: 1, role: 'admin' } as unknown as User,
+      { id: 2, role: 'user' } as unknown as User,
     ]
 
     store.filters.roles = ['admin']
@@ -115,8 +117,8 @@ describe('User Store', () => {
   it('sorts users correctly', () => {
     const store = useUserStore()
     store.users = [
-      { id: 1, firstName: 'Zara', lastName: 'Adams', age: 30 } as any,
-      { id: 2, firstName: 'Alice', lastName: 'Brown', age: 25 } as any,
+      { id: 1, firstName: 'Zara', lastName: 'Adams', age: 30 } as unknown as User,
+      { id: 2, firstName: 'Alice', lastName: 'Brown', age: 25 } as unknown as User,
     ]
 
     store.sortField = 'firstName'
@@ -129,7 +131,7 @@ describe('User Store', () => {
 
   it('paginates users correctly', () => {
     const store = useUserStore()
-    store.users = Array.from({ length: 30 }, (_, i) => ({ id: i + 1 } as any))
+    store.users = Array.from({ length: 30 }, (_, i) => ({ id: i + 1 } as unknown as User))
 
     store.pagination.itemsPerPage = 12
     store.pagination.currentPage = 1

@@ -4,16 +4,16 @@
       <!-- Large Profile Picture -->
       <div class="flex-shrink-0">
         <button 
-          @click="isZoomed = true" 
-          class="relative group cursor-zoom-in focus:outline-none"
+          class="relative group cursor-zoom-in focus:outline-none" 
           aria-label="Zoom profile image"
+          @click="isZoomed = true"
         >
           <NuxtImg
             :src="user.image"
             :alt="`${user.firstName} ${user.lastName}`"
             class="w-48 h-48 rounded-2xl object-cover border-4 border-slate-200 shadow-lg transition-transform duration-300 group-hover:scale-105"
           />
-          <div class="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+          <div class="absolute inset-0 rounded-2xl bg-black/0 group-hover:bg-black/10 transition-colors duration-300"/>
         </button>
       </div>
 
@@ -31,15 +31,15 @@
           <!-- Actions -->
           <div class="flex gap-2">
             <button 
-              @click="$emit('edit')" 
-              class="btn btn-secondary flex items-center gap-2"
+              class="btn btn-secondary flex items-center gap-2" 
+              @click="$emit('edit')"
             >
               <Icon name="heroicons:pencil-square" class="w-5 h-5" />
               <span class="hidden sm:inline">Edit</span>
             </button>
             <button 
-              @click="$emit('delete')" 
-              class="btn bg-white border border-red-200 text-red-600 hover:bg-red-50 flex items-center gap-2"
+              class="btn bg-white border border-red-200 text-red-600 hover:bg-red-50 flex items-center gap-2" 
+              @click="$emit('delete')"
             >
               <Icon name="heroicons:trash" class="w-5 h-5" />
               <span class="hidden sm:inline">Delete</span>

@@ -2,7 +2,7 @@
   <Teleport to="body">
     <div class="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
       <!-- Backdrop -->
-      <div class="absolute inset-0 bg-black/50" @click="$emit('cancel')"></div>
+      <div class="absolute inset-0 bg-black/50" @click="$emit('cancel')"/>
 
       <!-- Dialog -->
       <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-scale-in">
@@ -14,10 +14,10 @@
         <p class="text-slate-600 text-center mb-6">{{ message }}</p>
 
         <div class="flex gap-3">
-          <button @click="$emit('cancel')" class="btn btn-secondary flex-1">
+          <button class="btn btn-secondary flex-1" @click="$emit('cancel')">
             Cancel
           </button>
-          <button @click="$emit('confirm')" class="btn btn-danger flex-1">
+          <button class="btn btn-danger flex-1" @click="$emit('confirm')">
             Delete
           </button>
         </div>

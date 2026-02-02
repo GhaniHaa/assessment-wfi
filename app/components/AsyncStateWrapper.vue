@@ -5,7 +5,7 @@
 
   <div v-else-if="error" class="text-center py-20">
     <div class="text-red-600 mb-4">{{ error }}</div>
-    <button @click="$emit('retry')" class="btn btn-primary">
+    <button class="btn btn-primary" @click="$emit('retry')">
       Retry
     </button>
   </div>
