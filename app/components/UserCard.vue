@@ -35,14 +35,14 @@
         <button
           class="p-2 text-slate-600 hover:text-primary-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
           title="Edit"
-          @click="$emit('edit', user)"
+          @click="emit('edit', user)"
         >
           <Icon name="heroicons:pencil" class="w-4 h-4" />
         </button>
         <button
           class="p-2 text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
           title="Delete"
-          @click="$emit('delete', user.id)"
+          @click="emit('delete', user.id)"
         >
           <Icon name="heroicons:trash" class="w-4 h-4" />
         </button>
@@ -91,14 +91,12 @@
 <script setup lang="ts">
 import type { User } from '../types/user'
 
-withDefaults(defineProps<{
+const { user, loading = 'lazy' } = defineProps<{
   user: User
   loading?: 'lazy' | 'eager'
-}>(), {
-  loading: 'lazy'
-})
+}>()
 
-defineEmits<{
+const emit = defineEmits<{
   edit: [user: User]
   delete: [id: number]
 }>()

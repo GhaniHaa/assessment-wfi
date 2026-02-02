@@ -46,15 +46,8 @@
 <script setup lang="ts">
 import type { SortField, SortOrder } from '../types/user'
 
-const props = defineProps<{
-  field: SortField
-  order: SortOrder
-}>()
-
-const emit = defineEmits<{
-  'update:field': [value: SortField]
-  'update:order': [value: SortOrder]
-}>()
+const field = defineModel<SortField>('field', { required: true })
+const order = defineModel<SortOrder>('order', { required: true })
 
 const options: { label: string; value: SortField }[] = [
   { label: 'Name', value: 'firstName' },
@@ -63,11 +56,11 @@ const options: { label: string; value: SortField }[] = [
 ]
 
 function handleSort(value: SortField) {
-  if (props.field === value) {
-    emit('update:order', props.order === 'asc' ? 'desc' : 'asc')
+  if (field.value === value) {
+    order.value = order.value === 'asc' ? 'desc' : 'asc'
   } else {
-    emit('update:field', value)
-    emit('update:order', 'asc')
+    field.value = value
+    order.value = 'asc'
   }
 }
 </script>

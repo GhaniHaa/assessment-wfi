@@ -75,14 +75,20 @@ describe('Pagination Component', () => {
   })
 
   it('emits update:itemsPerPage and resets page when limit changes', async () => {
+    // Start on page 2 so we can verify it resets to page 1
     const wrapper = mount(Pagination, {
-      props: defaultProps,
+      props: {
+        ...defaultProps,
+        currentPage: 2,
+      },
     })
 
     const select = wrapper.find('select')
     await select.setValue('25')
 
+    // With defineModel, itemsPerPage emits update event
     expect(wrapper.emitted('update:itemsPerPage')?.[0]).toEqual([25])
+    // currentPage should reset to 1
     expect(wrapper.emitted('update:currentPage')?.[0]).toEqual([1])
   })
 })

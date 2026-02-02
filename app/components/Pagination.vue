@@ -62,46 +62,42 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  currentPage: number
-  totalPages: number
-  itemsPerPage: number
-}>()
+const currentPage = defineModel<number>('currentPage', { required: true })
+const itemsPerPage = defineModel<number>('itemsPerPage', { required: true })
 
-const emit = defineEmits<{
-  'update:currentPage': [value: number]
-  'update:itemsPerPage': [value: number]
+const { totalPages } = defineProps<{
+  totalPages: number
 }>()
 
 const visiblePages = computed(() => {
   const pages: (number | string)[] = []
   const maxVisible = 7
 
-  if (props.totalPages <= maxVisible) {
-    for (let i = 1; i <= props.totalPages; i++) {
+  if (totalPages <= maxVisible) {
+    for (let i = 1; i <= totalPages; i++) {
       pages.push(i)
     }
   } else {
-    if (props.currentPage <= 4) {
+    if (currentPage.value <= 4) {
       for (let i = 1; i <= 5; i++) {
         pages.push(i)
       }
       pages.push('...')
-      pages.push(props.totalPages)
-    } else if (props.currentPage >= props.totalPages - 3) {
+      pages.push(totalPages)
+    } else if (currentPage.value >= totalPages - 3) {
       pages.push(1)
       pages.push('...')
-      for (let i = props.totalPages - 4; i <= props.totalPages; i++) {
+      for (let i = totalPages - 4; i <= totalPages; i++) {
         pages.push(i)
       }
     } else {
       pages.push(1)
       pages.push('...')
-      for (let i = props.currentPage - 1; i <= props.currentPage + 1; i++) {
+      for (let i = currentPage.value - 1; i <= currentPage.value + 1; i++) {
         pages.push(i)
       }
       pages.push('...')
-      pages.push(props.totalPages)
+      pages.push(totalPages)
     }
   }
 
@@ -109,14 +105,14 @@ const visiblePages = computed(() => {
 })
 
 function goToPage(page: number) {
-  if (page >= 1 && page <= props.totalPages) {
-    emit('update:currentPage', page)
+  if (page >= 1 && page <= totalPages) {
+    currentPage.value = page
   }
 }
 
 function handleLimitChange(event: Event) {
   const value = Number((event.target as HTMLSelectElement).value)
-  emit('update:itemsPerPage', value)
-  emit('update:currentPage', 1)
+  itemsPerPage.value = value
+  currentPage.value = 1
 }
 </script>

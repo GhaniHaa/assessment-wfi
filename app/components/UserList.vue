@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import type { User } from '../types/user'
 
-defineProps<{
+const { users, isLoading } = defineProps<{
   users: User[]
   isLoading: boolean
 }>()

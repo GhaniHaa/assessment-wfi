@@ -5,7 +5,7 @@
 
   <div v-else-if="error" class="text-center py-20">
     <div class="text-red-600 mb-4">{{ error }}</div>
-    <button class="btn btn-primary" @click="$emit('retry')">
+    <button class="btn btn-primary" @click="emit('retry')">
       Retry
     </button>
   </div>
@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const { loading, error } = defineProps<{
   loading: boolean
   error: string | null
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   retry: []
 }>()
 </script>

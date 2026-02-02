@@ -11,7 +11,7 @@
     <button
       v-if="modelValue"
       class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 flex items-center"
-      @click="$emit('update:modelValue', '')"
+      @click="modelValue = ''"
     >
       <Icon name="heroicons:x-mark" class="w-5 h-5" />
     </button>
@@ -19,13 +19,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  modelValue: string
-}>()
-
-const emit = defineEmits<{
-  'update:modelValue': [value: string]
-}>()
+const modelValue = defineModel<string>({ required: true })
 
 let debounceTimer: ReturnType<typeof setTimeout>
 
@@ -34,7 +28,11 @@ function handleInput(event: Event) {
   
   clearTimeout(debounceTimer)
   debounceTimer = setTimeout(() => {
-    emit('update:modelValue', value)
+    modelValue.value = value
   }, 300)
 }
+
+onUnmounted(() => {
+  clearTimeout(debounceTimer)
+})
 </script>

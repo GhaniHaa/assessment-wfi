@@ -43,30 +43,21 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{
-  roles: string[]
-  genders: string[]
-}>()
-
-const emit = defineEmits<{
-  'update:roles': [value: string[]]
-  'update:genders': [value: string[]]
-}>()
+const roles = defineModel<string[]>('roles', { required: true })
+const genders = defineModel<string[]>('genders', { required: true })
 
 const availableRoles = ['admin', 'moderator', 'user']
 const availableGenders = ['male', 'female']
 
 function toggleRole(role: string) {
-  const newRoles = props.roles.includes(role)
-    ? props.roles.filter(r => r !== role)
-    : [...props.roles, role]
-  emit('update:roles', newRoles)
+  roles.value = roles.value.includes(role)
+    ? roles.value.filter(r => r !== role)
+    : [...roles.value, role]
 }
 
 function toggleGender(gender: string) {
-  const newGenders = props.genders.includes(gender)
-    ? props.genders.filter(g => g !== gender)
-    : [...props.genders, gender]
-  emit('update:genders', newGenders)
+  genders.value = genders.value.includes(gender)
+    ? genders.value.filter(g => g !== gender)
+    : [...genders.value, gender]
 }
 </script>

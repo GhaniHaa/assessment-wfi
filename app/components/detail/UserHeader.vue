@@ -32,14 +32,14 @@
           <div class="flex gap-2">
             <button 
               class="btn btn-secondary flex items-center gap-2" 
-              @click="$emit('edit')"
+              @click="emit('edit')"
             >
               <Icon name="heroicons:pencil-square" class="w-5 h-5" />
               <span class="hidden sm:inline">Edit</span>
             </button>
             <button 
               class="btn bg-white border border-red-200 text-red-600 hover:bg-red-50 flex items-center gap-2" 
-              @click="$emit('delete')"
+              @click="emit('delete')"
             >
               <Icon name="heroicons:trash" class="w-5 h-5" />
               <span class="hidden sm:inline">Delete</span>
@@ -89,11 +89,11 @@
 <script setup lang="ts">
 import type { User } from '../../types/user'
 
-defineProps<{
+const { user } = defineProps<{
   user: User
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   edit: []
   delete: []
 }>()
