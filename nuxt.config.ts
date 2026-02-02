@@ -1,6 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
+  srcDir: 'app/',
   devtools: { enabled: true },
 
   runtimeConfig: {
@@ -13,7 +15,6 @@ export default defineNuxtConfig({
     },
   modules: [
     '@pinia/nuxt',
-    '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
     '@nuxt/fonts',
     '@nuxt/hints',
@@ -21,13 +22,15 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/test-utils',
   ],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
   pinia: {
     storesDirs: ['./stores/**'],
   },
-  alias: {
-    '@': './',
-    '~': './',
-  },
+
   css: [
     '~/assets/css/main.css',
   ],

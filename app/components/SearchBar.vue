@@ -27,7 +27,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: string]
 }>()
 
-let debounceTimer: NodeJS.Timeout
+let debounceTimer: ReturnType<typeof setTimeout>
 
 function handleInput(event: Event) {
   const value = (event.target as HTMLInputElement).value

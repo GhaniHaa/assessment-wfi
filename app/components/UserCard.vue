@@ -65,7 +65,7 @@
 
     <!-- Role Badge -->
     <div class="mb-4">
-      <span :class="['badge', `badge-${user.role}`]">
+      <span :class="['badge', `badge-${user.role.toLowerCase()}`]">
         {{ user.role.toUpperCase() }}
       </span>
     </div>

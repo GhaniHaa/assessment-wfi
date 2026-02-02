@@ -11,7 +11,7 @@
           :class="[
             'badge cursor-pointer border-2 transition-all',
             roles.includes(role)
-              ? `badge-${role} border-current`
+              ? `badge-${role.toLowerCase()} border-current`
               : 'bg-slate-100 text-slate-600 border-transparent hover:border-slate-300'
           ]"
         >
