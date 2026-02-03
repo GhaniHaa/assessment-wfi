@@ -24,5 +24,28 @@ export const useApi = () => {
         params: { q: query },
       })
     },
+
+    // Update users
+    async updateUser(id: number, user: Partial<User>): Promise<User> {
+      return $fetch<User>(`${API_BASE}/users/${id}`, {
+        method: 'PUT',
+        body: user,
+      })
+    },
+
+    // Delete user
+    async deleteUser(id: number): Promise<void> {
+      return $fetch<void>(`${API_BASE}/users/${id}`, {
+        method: 'DELETE',
+      })
+    },
+
+    // Add user
+    async addUser(user: Partial<User>): Promise<User> {
+      return $fetch<User>(`${API_BASE}/users/add`, {
+        method: 'POST',
+        body: user,
+      })
+    },
   }
 }

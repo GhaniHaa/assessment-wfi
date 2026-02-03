@@ -10,15 +10,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <UsersControlsPanel
         v-model:search-query="userStore.searchQuery"
-        v-model:roles="userStore.filters.roles"
-        v-model:genders="userStore.filters.genders"
+        v-model:roles="roleFilter"
+        v-model:genders="genderFilter"
         v-model:sort-field="userStore.sortField"
         v-model:sort-order="userStore.sortOrder"
         class="mb-8"
       />
       
-      <!-- Error State -->
-      <div v-if="userStore.error" class="text-center py-20">
+      <!-- Error State (Full Page) -->
+      <div v-if="userStore.error && userStore.users.length === 0" class="text-center py-20">
         <div class="text-red-600 mb-4">{{ userStore.error }}</div>
         <button class="btn btn-primary" @click="userStore.fetchUsers()">
           Retry
@@ -26,6 +26,12 @@
       </div>
 
       <template v-else>
+        <!-- Error Banner (Action Failed) -->
+        <div v-if="userStore.error" class="bg-red-50 text-red-700 p-4 rounded-lg mb-6 flex justify-between items-center">
+          <span>{{ userStore.error }}</span>
+          <button @click="userStore.error = null" class="text-sm font-medium hover:underline">Dismiss</button>
+        </div>
+
         <UserList
           :users="userStore.paginatedUsers"
           :is-loading="userStore.loading"
@@ -81,11 +87,21 @@ const {
   cancelDelete,
 } = useUserManagement()
 
+const roleFilter = computed({
+  get: () => userStore.filters.role || [],
+  set: (val: string[]) => { userStore.filters.role = val }
+})
+
+const genderFilter = computed({
+  get: () => userStore.filters.gender || [],
+  set: (val: string[]) => { userStore.filters.gender = val }
+})
+
 const hasActiveFilters = computed(() =>
   Boolean(
     userStore.searchQuery ||
-    userStore.filters.roles.length > 0 ||
-    userStore.filters.genders.length > 0
+    roleFilter.value.length > 0 ||
+    genderFilter.value.length > 0
   )
 )
 
